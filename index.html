@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShoesStore | Online Shoe Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- HEADER h ye -->
+    <header class="site-header">
+        <a class="logo" href="#home">Shoes<span>Store</span></a>
+        <nav class="main-nav" aria-label="Main navigation">
+            <a href="#home">Home</a>
+            <a href="#shop">Shop</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <div class="header-actions">
+            <button class="button button-light" id="open-cart" type="button">Cart (<span id="cart-count">0</span>)</button>
+            <button class="button button-dark" id="open-admin" type="button">Manage Products</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <p class="eyebrow">FIND YOUR NEXT FAVOURITE SHOES</p>
+                <h1>Every step.<br><span>Better style.</span></h1>
+                <p>Step into style, walk with confidence. Har kadam par comfort aur fashion ka naya safar</p>
+                <a class="button button-dark" href="#shop">Shop shoes</a>
+            </div>
+            <div class="hero-image" role="img" aria-label="Sneakers displayed on a clean background"></div>
+        </section>
+
+        <!-- SHOP SECTION-->
+        <section class="shop-section" id="shop">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">THE COLLECTION</p>
+                    <h2>Shop shoes</h2>
+                </div>
+                <p id="product-count" class="muted">0 products</p>
+            </div>
+
+            <div class="shop-tools">
+                <label class="search-label">
+                    <span class="visually-hidden">Search shoes</span>
+                    <input id="search-input" type="search" placeholder="Search shoes...">
+                </label>
+                <label>
+                    <span class="visually-hidden">Filter by category</span>
+                    <select id="category-filter">
+                        <option value="All">All categories</option>
+                        <option value="Sports">Sports</option>
+                        <option value="Casual">Casual</option>
+                        <option value="Formal">Formal</option>
+                        <option value="Kids">Kids</option>
+                    </select>
+                </label>
+                <label>
+                    <span class="visually-hidden">Sort products</span>
+                    <select id="sort-filter">
+                        <option value="featured">Sort: Featured</option>
+                        <option value="low-high">Price: Low to high</option>
+                        <option value="high-low">Price: High to low</option>
+                        <option value="name">Name: A to Z</option>
+                    </select>
+                </label>
+            </div>
+
+            <div id="product-list" class="product-grid" aria-live="polite"></div>
+            <p id="empty-message" class="empty-message hidden">No shoes found. Try another search.</p>
+        </section>
+
+        <!-- ABOUT SECTION-->
+        <section class="about-section" id="about">
+            <p class="eyebrow">ABOUT SHOES STORE</p>
+            <h2>Comfort for every day.</h2>
+            <p>ShoesStore was founded in 2026 with one mission — to bring premium quality footwear to everyone. We believe that great shoes can transform your confidence and style.</p>
+        </section>
+
+        <!-- CONTACT US SECTION -->
+<section class="contact-section" id="contact">
+
+    <div class="contact-heading">
+        <h2>Contact Us</h2>
+        <div class="heading-line"></div>
+        <p>Have a question? We would love to hear from you!</p>
+    </div>
+
+    <div class="contact-container">
+
+        <div class="contact-info">
+
+            <h3>Get In Touch</h3>
+
+            <p>
+                <span>📧</span>
+                <a href="mailto:nakshatrapatidar10@gmail.com">
+                    nakshatrapatidar10@gmail.com
+                </a>
+            </p>
+
+            <p>
+                <span>📞</span>
+                <a href="tel:+917049840210">
+                    +917049840210
+                </a>
+            </p>
+
+            <p>
+                <span>📍</span>
+                India
+            </p>
+
+            <p>
+                <span>⏰</span>
+                Mon–Fri: 9 AM–6 PM
+            </p>
+
+        </div>
+
+        <div class="contact-form-box">
+
+            <h3>Send Us a Message</h3>
+
+            <form id="contact-form">
+
+                <input
+                    type="text"
+                    id="contact-name"
+                    placeholder="Your Name"
+                    required
+                >
+
+                <input
+                    type="email"
+                    id="contact-email"
+                    placeholder="Your Email"
+                    required
+                >
+
+                <input
+                    type="text"
+                    id="contact-subject"
+                    placeholder="Subject"
+                    required
+                >
+
+                <textarea
+                    id="contact-message"
+                    placeholder="Your Message"
+                    rows="5"
+                    required
+                ></textarea>
+
+                <button type="submit" class="contact-button">
+                    Send Message
+                </button>
+
+                <p id="contact-status" aria-live="polite"></p>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+    </main>
+
+    <!-- CART -->
+    <div class="overlay hidden" id="cart-overlay"></div>
+    <aside class="side-panel hidden" id="cart-panel" aria-label="Shopping cart">
+        <div class="panel-heading">
+            <h2>Your cart</h2>
+            <button class="icon-button" id="close-cart" aria-label="Close cart" type="button">✕</button>
+        </div>
+        <div id="cart-items" class="cart-items"></div>
+        <div class="cart-footer">
+            <div class="total-row"><span>Subtotal</span><strong id="cart-subtotal">₹0</strong></div>
+            <p class="small-note">Demo only: no real payment will be taken.</p>
+            <button class="button button-dark full-width" id="checkout-button" type="button">Place demo order</button>
+        </div>
+    </aside>
+
+    <!-- PRODUCT ADMIN MODAL: Add, edit and delete products -->
+    <div class="modal-backdrop hidden" id="admin-modal">
+        <section class="modal admin-modal" role="dialog" aria-modal="true" aria-labelledby="admin-title">
+            <div class="panel-heading">
+                <div>
+                    <p class="eyebrow">STORE MANAGEMENT</p>
+                    <h2 id="admin-title">Manage products</h2>
+                </div>
+                <button class="icon-button" id="close-admin" aria-label="Close product manager" type="button">✕</button>
+            </div>
+            <p class="small-note">Add, edit or delete products here.</p>
+            <form id="product-form" class="product-form">
+                <input type="hidden" id="edit-product-id">
+                <label>Product name
+                    <input id="product-name" type="text" required maxlength="80" placeholder="e.g. Everyday Runner">
+                </label>
+                <div class="form-row">
+                    <label>Price (₹)
+                        <input id="product-price" type="number" min="1" step="1" required placeholder="1999">
+                    </label>
+                    <label>Category
+                        <select id="product-category" required>
+                            <option value="Sports">Sports</option>
+                            <option value="Casual">Casual</option>
+                            <option value="Formal">Formal</option>
+                            <option value="Kids">Kids</option>
+                        </select>
+                    </label>
+                </div>
+                <label>Image URL
+                    <input id="product-image" type="url" required placeholder="https://example.com/shoe.jpg">
+                </label>
+                <label>Short description
+                    <textarea id="product-description" rows="2" maxlength="180" placeholder="Comfortable shoes for everyday use"></textarea>
+                </label>
+                <div class="form-actions">
+                    <button class="button button-dark" id="save-product-button" type="submit">Add product</button>
+                    <button class="button button-light hidden" id="cancel-edit-button" type="button">Cancel edit</button>
+                </div>
+                <p id="admin-message" class="form-message" role="status"></p>
+            </form>
+            <h3 class="admin-list-title">Current products</h3>
+            <div id="admin-product-list" class="admin-product-list"></div>
+        </section>
+    </div>
+
+    <!-- CHECKOUT / ORDER MESSAGE -->
+    <div class="modal-backdrop hidden" id="message-modal">
+        <section class="modal message-modal" role="dialog" aria-modal="true" aria-labelledby="message-title">
+            <button class="icon-button modal-close" id="close-message" aria-label="Close message" type="button">✕</button>
+            <h2 id="message-title">Demo order</h2>
+            <p id="message-text"></p>
+            <button class="button button-dark" id="message-ok" type="button">Continue shopping</button>
+        </section>
+    </div>
+
+    <footer class="site-footer">
+        <a class="logo" href="#home">Shoes<span>Store</span></a>
+        <p>Comfort for every day.</p>
+    </footer>
+
+    
+    <script src="script.js"></script>
+    
+    <footer class="footer"> <p> &copy; <span id="year"></span> ShoesStore. All Rights Reserved. </p> 
+        <p>Designed by Nakshatra Patidar</p> </footer>
+</body>
+</html>
